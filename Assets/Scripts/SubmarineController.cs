@@ -8,8 +8,8 @@ public class SubmarineController : MonoBehaviour
 {
     public float leverAngle = 0;
     public float verticalSpeed = 0;
-    public GameObject horizontalController;
-    public GameObject verticalController;
+    public HingeJoint horizontalController;
+    public HingeJoint verticalController;
 
     private Rigidbody rb;
     private float minHValue;
@@ -22,10 +22,10 @@ public class SubmarineController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        minHValue = horizontalController.minimum;
-        maxHValue = horizontalController.maximum;
-        minVValue = verticalController.minimum;
-        maxVValue = verticalController.maximum;
+        minHValue = horizontalController.limits.min;
+        maxHValue = horizontalController.limits.max;
+        minVValue = verticalController.limits.min;
+        maxVValue = verticalController.limits.max;
     }
 
     private void Update()
@@ -36,7 +36,7 @@ public class SubmarineController : MonoBehaviour
     private void UpdateSpeed()
     {
         float currentHValue = horizontalController.current;
-        float horizontalSpeed = math.remap(-2f, 2f, minHValue, maxHValue, currentHValue);
+        float horizontalSpeed = math.remap(-1f, 3f, minHValue, maxHValue, currentHValue);
         Vector3 movement = new Vector3(0.0f, 0.0f, 0.0f);
         float currentHSpeed = rb.velocity.z;
         if (currentHSpeed < horizontalSpeed)

@@ -35,8 +35,8 @@ public class SubmarineController : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        float currentHValue = horizontalController.current;
-        float horizontalSpeed = math.remap(-1f, 3f, minHValue, maxHValue, currentHValue);
+        //float currentHValue = horizontalController.current;
+        //float horizontalSpeed = math.remap(-1f, 3f, minHValue, maxHValue, currentHValue);
         Vector3 movement = new Vector3(0.0f, 0.0f, 0.0f);
         float currentHSpeed = rb.velocity.z;
         if (currentHSpeed < horizontalSpeed)

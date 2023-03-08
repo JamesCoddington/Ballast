@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 using TMPro;
+using Valve.VR.InteractionSystem;
 
 public class SubmarineController : MonoBehaviour
 {
-    public float leverAngle = 0;
     public float verticalSpeed = 0;
-    public HingeJoint horizontalController;
-    public HingeJoint verticalController;
+    public CircularDrive horizontalController;
+    public CircularDrive verticalController;
+    public float horizontalSpeed;
 
     private Rigidbody rb;
     private float minHValue;
@@ -22,10 +23,10 @@ public class SubmarineController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        minHValue = horizontalController.limits.min;
-        maxHValue = horizontalController.limits.max;
-        minVValue = verticalController.limits.min;
-        maxVValue = verticalController.limits.max;
+        minHValue = horizontalController.minAngle;
+        maxHValue = horizontalController.maxAngle;
+        //minVValue = verticalController.limits.min;
+        //maxVValue = verticalController.limits.max;
     }
 
     private void Update()
@@ -35,8 +36,8 @@ public class SubmarineController : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        //float currentHValue = horizontalController.current;
-        //float horizontalSpeed = math.remap(-1f, 3f, minHValue, maxHValue, currentHValue);
+        float currentHValue = horizontalController.outAngle;
+        horizontalSpeed = math.remap(minHValue, maxHValue, -2f, 2f, currentHValue);
         Vector3 movement = new Vector3(0.0f, 0.0f, 0.0f);
         float currentHSpeed = rb.velocity.z;
         if (currentHSpeed < horizontalSpeed)
@@ -46,6 +47,7 @@ public class SubmarineController : MonoBehaviour
         {
             movement.z -= 0.1f;
         }
+        /*
         float currentVSpeed = rb.velocity.y;
         if (currentVSpeed < verticalSpeed)
         {
@@ -55,8 +57,15 @@ public class SubmarineController : MonoBehaviour
         {
             movement.y -= 0.1f;
         }
+        */
         rb.AddForce(movement);
     }
 
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+        }
+    }
 }

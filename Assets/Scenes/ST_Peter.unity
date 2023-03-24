@@ -1399,6 +1399,8 @@ MonoBehaviour:
   verticalController: {fileID: 0}
   rotationController: {fileID: 0}
   horizontalSpeed: 0
+  rotationalSpeed: 0
+  elevation: 0
 --- !u!1 &971933169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,6 +2210,8 @@ MonoBehaviour:
   verticalController: {fileID: 0}
   rotationController: {fileID: 0}
   horizontalSpeed: 0
+  rotationalSpeed: 0
+  elevation: 0
 --- !u!1 &2010569980
 GameObject:
   m_ObjectHideFlags: 0
@@ -3074,6 +3078,8 @@ MonoBehaviour:
   verticalController: {fileID: 0}
   rotationController: {fileID: 0}
   horizontalSpeed: 0
+  rotationalSpeed: 0
+  elevation: 20
 --- !u!64 &8390714867448257499
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3096,7 +3102,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4204852813354215720}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 1
   m_AngularDrag: 5
   m_UseGravity: 1
@@ -3117,8 +3123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableInput: 1
-  verticalTurnSpeed: 5
-  horizontalTurnSpeed: 5
+  verticalTurnSpeed: 0
+  horizontalTurnSpeed: 10
 --- !u!114 &8390714867448257502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3133,7 +3139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableInput: 1
   moveSpeed: 1
-  enableObstacleAvoidance: 1
+  enableObstacleAvoidance: 0
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 1
@@ -3153,7 +3159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ef8221a9df40d49b7f8e0f4b4eb7a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHoverThrust: 30
+  maxHoverThrust: 50
   targetHeight: 6
   hoverableLayers:
     serializedVersion: 2
@@ -3163,7 +3169,7 @@ MonoBehaviour:
   rowCount: 3
   stabalizeForce: 10
   stabalizeZ: 1
-  stabalizeX: 0
+  stabalizeX: 1
   alwaysRenderGizmos: 0
   gridColour: {r: 0, g: 1, b: 1, a: 0.5}
 --- !u!1 &8550906330336740116

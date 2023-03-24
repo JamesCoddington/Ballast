@@ -13,7 +13,7 @@ namespace EZHover
         [SerializeField] private float horizontalTurnSpeed = 5f;
         public float HorizontalTurnSpeed { get { return horizontalTurnSpeed; } set { horizontalTurnSpeed = value; } }
 
-        Rigidbody rb;
+        public Rigidbody rb;
         private Vector2 turnDir;
 
         private void Awake()

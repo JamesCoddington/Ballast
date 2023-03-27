@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/S_MainGame.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/ST_Jfames.unity
+    guid: f468dcc53cad9424ea53301564753994
+  - enabled: 1
+    path: Assets/Scenes/ST_GameOver.unity
+    guid: 6ef74af1c5311d7449758b18b2013103
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 97effc053268f5446bf741d4db9a30d9,
       type: 2}

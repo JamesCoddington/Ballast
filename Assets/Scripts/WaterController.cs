@@ -31,6 +31,11 @@ public class WaterController : MonoBehaviour
     {
         if (cracks > 0)
         {
+            if (transform.position == target)
+            {
+                // Uses ST_GameOver
+                ScenesManager.Instance.LoadScene(ScenesManager.Scene.ST_GameOver);
+            }
             if (water == Water.Falling)
             {
                 water = Water.Rising;

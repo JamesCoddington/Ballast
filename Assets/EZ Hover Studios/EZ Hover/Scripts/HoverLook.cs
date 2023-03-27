@@ -14,7 +14,7 @@ namespace EZHover
         public float HorizontalTurnSpeed { get { return horizontalTurnSpeed; } set { horizontalTurnSpeed = value; } }
 
         private Rigidbody rb;
-        private Vector2 turnDir;
+        public Vector2 turnDir;
 
         private void Awake()
         {

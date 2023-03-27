@@ -54,19 +54,14 @@ public class SubmarineController : MonoBehaviour
         
 
         // TODO: Complete rotation (set values of rotation to .5, .7, and .9)
-        float linearMappingValue = rotationController.linearMapping.value;
-        if (linearMappingValue < 0.1)
-        {
-            rotationalSpeed = -0.9f;
-        }
-
-        hoverLook?.Turn(new Vector2(1, 0));
+        float rotationInput = rotationController.linearMapping.value;
+        rotationalSpeed = math.remap(0f, 1f, -1f, 1f, rotationInput);
+        hoverLook.HorizontalTurnSpeed = rotationalSpeed;
+        hoverLook?.Turn(new Vector2(rotationInput, 0));
 
         // TODO: Complete elevation
-        // float currentVertical = verticalController.linearMapping.value;
-        //float currentVertical = 0.5f;
-        // Map from Linear Mapping progression from 0 to 1 to minimum/maximum height in cave
-        //elevation = math.remap(0f, 1f, minVertical, maxVertical, currentVertical);
+        float elevationInput = verticalController.linearMapping.value;
+        elevation = math.remap(0f, 1f, 50f, 5f, elevationInput);
         hoverGrid.TargetHeight = elevation;
     }
 

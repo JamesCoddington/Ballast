@@ -51,12 +51,16 @@ public class SubmarineController : MonoBehaviour
         horizontalSpeed = math.remap(minHorizontal, maxHorizontal, -0.5f, 1f, currentHorizontal);
         hoverMovement?.Move(new Vector2(0.0f, horizontalSpeed));
 
-        // TODO: Complete rotation
-        // float currentRotation = rotationController.linearMapping.value;
-        //float currentRotation = 0.5f;
-        // Map from Linear Mapping progression from 0 to 1 to the Left/Right mapping of -1 to 1
-        //rotationalSpeed = math.remap(0f, 1f, -1f, 1f, currentRotation);
-        hoverLook?.Turn(new Vector2(rotationalSpeed/1000, 0.0f));
+        
+
+        // TODO: Complete rotation (set values of rotation to .5, .7, and .9)
+        float linearMappingValue = rotationController.linearMapping.value;
+        if (linearMappingValue < 0.1)
+        {
+            rotationalSpeed = -0.9f;
+        }
+
+        hoverLook?.Turn(new Vector2(1, 0));
 
         // TODO: Complete elevation
         // float currentVertical = verticalController.linearMapping.value;

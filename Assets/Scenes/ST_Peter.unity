@@ -3124,7 +3124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableInput: 1
   verticalTurnSpeed: 0
-  horizontalTurnSpeed: 10
+  horizontalTurnSpeed: 0
 --- !u!114 &8390714867448257502
 MonoBehaviour:
   m_ObjectHideFlags: 0

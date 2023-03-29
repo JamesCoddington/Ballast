@@ -6,6 +6,7 @@ TagManager:
   tags:
   - projectile
   - FxTemporaire
+  - Creature Trigger
   layers:
   - Default
   - TransparentFX

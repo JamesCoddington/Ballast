@@ -25,7 +25,7 @@ public class SubmarineController : MonoBehaviour
     public float rotationalSpeed;
 
     [Header("Creature")]
-    public GameObject creaturePrefab;
+    public GameObject creature;
 
     private Rigidbody rb;
 
@@ -80,7 +80,7 @@ public class SubmarineController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Creature Trigger"))
         {
-            Instantiate(creaturePrefab, new Vector3(76f, 4.5f, 0.5f), new Quaternion(0, 0.707106829f, 0, 0.707106829f));
+            creature.SetActive(true);
             Debug.Log("made the creature (I think)");
         }
     }

@@ -11,7 +11,9 @@ enum Water
 public class WaterController : MonoBehaviour
 {
 
-    public float cracks;
+    
+    public GameObject leakParent;
+    float cracks;
     Water water = Water.Falling;
     float t;
     // 15 Is good
@@ -25,6 +27,14 @@ public class WaterController : MonoBehaviour
         startPosition = transform.position;
         target = (transform.position + new Vector3(0f, 2.5f, 0f));
         t = 0f;
+    }
+
+    void Update()
+    {
+        // print(leakParent.GetComponentsInChildren<Transform>().GetLength(0) - 1);
+        // GetComponentsInChildren<Transform>().GetLength(0)
+        // Gives off 1 when no leaks are there so we subtract by one
+        cracks = leakParent.GetComponentsInChildren<Transform>().GetLength(0) - 1;
     }
 
     void LateUpdate()

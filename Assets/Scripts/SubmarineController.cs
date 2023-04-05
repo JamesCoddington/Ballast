@@ -11,8 +11,10 @@ public class SubmarineController : MonoBehaviour
     [Header("Horizontal Controller")]
     public CircularDrive horizontalController;
     public float horizontalSpeed;
-    private float minHorizontal;
-    private float maxHorizontal;
+    public float minSpeed = -2.5f;
+    public float maxSpeed = 5f;
+    private float minAngle;
+    private float maxAngle;
 
     [Header("Elevation Controller")]
     public LinearDrive verticalController;
@@ -42,8 +44,8 @@ public class SubmarineController : MonoBehaviour
         hoverLook = GetComponent<HoverLook>();
         hoverGrid = GetComponent<HoverGrid>();
 
-        minHorizontal = horizontalController.minAngle;
-        maxHorizontal = horizontalController.maxAngle;
+        minAngle = horizontalController.minAngle;
+        maxAngle = horizontalController.maxAngle;
     }
 
     private void Update()
@@ -55,7 +57,7 @@ public class SubmarineController : MonoBehaviour
     private void UpdateSpeed()
     {
         float currentHorizontal = horizontalController.outAngle;
-        horizontalSpeed = math.remap(minHorizontal, maxHorizontal, -1f, 3f, currentHorizontal);
+        horizontalSpeed = math.remap(minAngle, maxAngle, minSpeed, maxSpeed, currentHorizontal);
         hoverMovement?.Move(new Vector2(0.0f, horizontalSpeed));
 
         float rotationInput = rotationController.linearMapping.value;
@@ -81,7 +83,6 @@ public class SubmarineController : MonoBehaviour
         if (other.gameObject.CompareTag("Creature Trigger"))
         {
             creature.SetActive(true);
-            Debug.Log("made the creature (I think)");
         }
     }
 }

@@ -1716,6 +1716,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalController: {fileID: 1280824888}
   horizontalSpeed: 0
+  minSpeed: 0
+  maxSpeed: 0
   verticalController: {fileID: 0}
   elevation: 0
   minElevation: 0
@@ -2278,7 +2280,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7250765c2612c934091588bf3b14303b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7250765c2612c934091588bf3b14303b,
         type: 3}
@@ -2288,7 +2290,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7250765c2612c934091588bf3b14303b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7250765c2612c934091588bf3b14303b,
         type: 3}
@@ -2298,7 +2300,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7250765c2612c934091588bf3b14303b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7250765c2612c934091588bf3b14303b,
         type: 3}
@@ -2370,11 +2372,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74dc78793f1656488865c000c3f809e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  submarine: {fileID: 925100269}
-  encounterDist: 5
-  attackDist: 0
-  movementSpeed: 1
+  submarine: {fileID: 4204852813354215720}
+  encounterDist: 30
+  attackDist: 5
+  movementSpeed: 10
   rotateSpeed: 1
+  dist: 0
 --- !u!1001 &1280824885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4688,6 +4691,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalController: {fileID: 1280824888}
   horizontalSpeed: 0
+  minSpeed: -2.5
+  maxSpeed: 5
   verticalController: {fileID: 1566086809}
   elevation: 20
   minElevation: 5

@@ -10,13 +10,13 @@ public class CreatureController : MonoBehaviour
     public float encounterDist = 30f;
     public float attackDist = 5f;
 
-    public float movementSpeed = 1f;
+    public float moveSpeed = 1f;
     public float rotateSpeed = 1f;
 
     [Header("Dev Info")]
     public float dist;
-    public GameObject focalPoint;
     public float rotationDirection;
+    public bool attackFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +29,10 @@ public class CreatureController : MonoBehaviour
         dist = checkDist();
         if (dist < encounterDist)
         {
-            if (dist < attackDist)
+            if (dist < attackDist && attackFlag)
             {
                 attackSub();
+                attackFlag = false;
             }
         moveCreature();
         rotateCreature();
@@ -46,31 +47,40 @@ public class CreatureController : MonoBehaviour
 
     public void moveCreature()
     {
-        float move = movementSpeed * Time.deltaTime;
-        if (dist < attackDist && transform.rotation.y != .7)
+        float move = moveSpeed * Time.deltaTime;
+        if (dist < attackDist)
         {
-            rotationDirection = 1;
-            if (transform.rotation.y > .7)
+            float rotate = rotateSpeed * Time.deltaTime;
+            if (transform.rotation.y < .75)
+            {
+                rotationDirection = 1;
+            } else if (transform.rotation.y > .65)
             {
                 rotationDirection = -1;
+            } else
+            {
+                rotateSpeed = 0;
+                attackFlag = true;
             }
-            print(transform.rotation.y);
-            transform.RotateAround(submarine.transform.position, submarine.transform.up, rotationDirection * move * 10);
+            transform.RotateAround(submarine.transform.position, submarine.transform.up, rotationDirection * rotate * 10);
         }
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, submarine.transform.position, move);
-
         }
     }
+
+
     public void attackSub()
     {
+        print("attack!");
+        // make sure to reset rotateSpeed after attack
         return;
     }
 
     public void rotateCreature()
     {
-        Vector3 targetDir = submarine.transform.position - transform.position + 2*(Vector3.down);
+        Vector3 targetDir = submarine.transform.position - transform.position;
         float step = rotateSpeed * Time.deltaTime;
         Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
         transform.rotation = Quaternion.LookRotation(newRotation);

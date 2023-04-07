@@ -8,20 +8,29 @@ using EZHover;
 
 public class SubmarineController : MonoBehaviour
 {
+    [Header("Horizontal Controller")]
     public CircularDrive horizontalController;
-    public LinearDrive verticalController;
-    public LinearDrive rotationController;
     public float horizontalSpeed;
-    public float rotationalSpeed;
+    public float minSpeed = -2.5f;
+    public float maxSpeed = 5f;
+    private float minAngle;
+    private float maxAngle;
+
+    [Header("Elevation Controller")]
+    public LinearDrive verticalController;
     public float elevation;
+    public float minElevation;
+    public float maxElevation;
+
+    [Header("Rotation Controller")]
+    public LinearDrive rotationController;
+    public float rotationalSpeed;
+
+    [Header("Creature")]
+    public GameObject creature;
 
     private Rigidbody rb;
-    private float minHorizontal;
-    private float maxHorizontal;
-    private float minVertical = 0;
-    private float maxVertical = 100;
-    private float minRotation;
-    private float maxRotation;
+
 
     HoverMovement hoverMovement;
     HoverLook hoverLook;
@@ -35,8 +44,8 @@ public class SubmarineController : MonoBehaviour
         hoverLook = GetComponent<HoverLook>();
         hoverGrid = GetComponent<HoverGrid>();
 
-        minHorizontal = horizontalController.minAngle;
-        maxHorizontal = horizontalController.maxAngle;
+        minAngle = horizontalController.minAngle;
+        maxAngle = horizontalController.maxAngle;
     }
 
     private void Update()
@@ -48,20 +57,16 @@ public class SubmarineController : MonoBehaviour
     private void UpdateSpeed()
     {
         float currentHorizontal = horizontalController.outAngle;
-        horizontalSpeed = math.remap(minHorizontal, maxHorizontal, -0.5f, 1f, currentHorizontal);
+        horizontalSpeed = math.remap(minAngle, maxAngle, minSpeed, maxSpeed, currentHorizontal);
         hoverMovement?.Move(new Vector2(0.0f, horizontalSpeed));
 
-        
-
-        // TODO: Complete rotation (set values of rotation to .5, .7, and .9)
         float rotationInput = rotationController.linearMapping.value;
         rotationalSpeed = math.remap(0f, 1f, -1f, 1f, rotationInput);
         hoverLook.HorizontalTurnSpeed = rotationalSpeed;
         hoverLook?.Turn(new Vector2(rotationInput, 0));
 
-        // TODO: Complete elevation
         float elevationInput = verticalController.linearMapping.value;
-        elevation = math.remap(0f, 1f, 50f, 5f, elevationInput);
+        elevation = math.remap(0f, 1f, maxElevation, minElevation, elevationInput);
         hoverGrid.TargetHeight = elevation;
     }
 
@@ -70,6 +75,14 @@ public class SubmarineController : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Creature Trigger"))
+        {
+            creature.SetActive(true);
         }
     }
 }

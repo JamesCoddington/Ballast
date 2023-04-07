@@ -29,7 +29,7 @@ namespace EZHover
             }
 
             rb.AddTorque(Vector3.up * turnDir.x * horizontalTurnSpeed * rb.mass);
-            Debug.Log("float: " + turnDir.x);
+            // Debug.Log("float: " + turnDir.x);
 
             var right = new Vector3(transform.right.x, 0f, transform.right.z);
             rb.AddTorque(right * turnDir.y * verticalTurnSpeed * -1 * rb.mass);

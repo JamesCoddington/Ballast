@@ -13,14 +13,22 @@ public class CreatureController : MonoBehaviour
     public float moveSpeed = 1f;
     public float rotateSpeed = 1f;
 
+    public Transform leftPosition;
+    public Transform rightPosition;
+    public Transform frontPosition;
+    private Transform[] positions;
+
     [Header("Dev Info")]
     public float dist;
     public float rotationDirection;
     public bool attackFlag = false;
+    public Transform targetPosition;
 
     // Start is called before the first frame update
     void Start()
     {
+        positions = new Transform[] {leftPosition,rightPosition,frontPosition};
+        targetPosition = frontPosition;
     }
 
     // Update is called once per frame
@@ -29,7 +37,7 @@ public class CreatureController : MonoBehaviour
         dist = checkDist();
         if (dist < encounterDist)
         {
-            if (dist < attackDist && attackFlag)
+            if (dist < attackDist && attackFlag && transform.position == targetPosition.position)
             {
                 attackSub();
                 attackFlag = false;
@@ -41,32 +49,32 @@ public class CreatureController : MonoBehaviour
 
     public float checkDist()
     {
-        float dist = Vector3.Distance(submarine.transform.position, transform.position);
+        if (!attackFlag) { 
+            foreach (Transform position in positions)
+            {
+                float targetPositionDist = Vector3.Distance(transform.position, targetPosition.transform.position);
+                float currentDist = Vector3.Distance(transform.position, position.transform.position);
+                if (currentDist < targetPositionDist)
+                {
+                    targetPosition = position;
+                }
+            }
+        }
+        if (transform.position == leftPosition.transform.position || transform.position == rightPosition.transform.position)
+        {
+            targetPosition = frontPosition;
+            attackFlag = true;
+        }
+        float dist = Vector3.Distance(transform.position, targetPosition.transform.position);
         return dist;
     }
 
     public void moveCreature()
     {
         float move = moveSpeed * Time.deltaTime;
-        if (dist < attackDist)
+        if (dist < encounterDist)
         {
-            float rotate = rotateSpeed * Time.deltaTime;
-            if (transform.rotation.y < .75)
-            {
-                rotationDirection = 1;
-            } else if (transform.rotation.y > .65)
-            {
-                rotationDirection = -1;
-            } else
-            {
-                rotateSpeed = 0;
-                attackFlag = true;
-            }
-            transform.RotateAround(submarine.transform.position, submarine.transform.up, rotationDirection * rotate * 10);
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, submarine.transform.position, move);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition.transform.position, move);
         }
     }
 
@@ -80,7 +88,8 @@ public class CreatureController : MonoBehaviour
 
     public void rotateCreature()
     {
-        Vector3 targetDir = submarine.transform.position - transform.position;
+        // adjust for offset by lowering focus point
+        Vector3 targetDir = submarine.transform.position - transform.position - 3*Vector3.up;
         float step = rotateSpeed * Time.deltaTime;
         Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
         transform.rotation = Quaternion.LookRotation(newRotation);

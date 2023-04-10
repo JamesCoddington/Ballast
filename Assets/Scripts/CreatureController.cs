@@ -8,7 +8,7 @@ public class CreatureController : MonoBehaviour
     public GameObject submarine;
 
     public float encounterDist = 30f;
-    public float attackDist = 5f;
+    // public float attackDist = 5f;
 
     public float moveSpeed = 1f;
     public float rotateSpeed = 1f;
@@ -22,6 +22,7 @@ public class CreatureController : MonoBehaviour
     public float dist;
     public float rotationDirection;
     public bool attackFlag = false;
+    public bool resetFlag = false;
     public Transform targetPosition;
 
     // Start is called before the first frame update
@@ -37,10 +38,11 @@ public class CreatureController : MonoBehaviour
         dist = checkDist();
         if (dist < encounterDist)
         {
-            if (dist < attackDist && attackFlag && transform.position == targetPosition.position)
+            if (attackFlag && transform.position == targetPosition.position)
             {
                 attackSub();
                 attackFlag = false;
+                resetFlag = true;
             }
         moveCreature();
         rotateCreature();
@@ -81,8 +83,7 @@ public class CreatureController : MonoBehaviour
 
     public void attackSub()
     {
-        print("attack!");
-        // make sure to reset rotateSpeed after attack
+        
         return;
     }
 

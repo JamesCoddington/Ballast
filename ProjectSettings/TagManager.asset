@@ -8,6 +8,7 @@ TagManager:
   - FxTemporaire
   - environment
   - Creature Trigger
+  - Welder
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,9 @@ TagManager:
   - Water
   - UI
   - Wire
-  - 
-  - 
-  - 
+  - Player
+  - SubExterior
+  - Post
   - 
   - 
   - 

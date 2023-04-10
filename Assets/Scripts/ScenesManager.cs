@@ -11,6 +11,7 @@ public class ScenesManager : MonoBehaviour
     {
         ST_MainMenu,
         ST_Jfames,
+        ST_Peter,
         ST_GameOver,
     }
 

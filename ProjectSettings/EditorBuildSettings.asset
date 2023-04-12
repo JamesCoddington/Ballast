@@ -8,9 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/S_MainGame.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ST_Jfames.unity
     guid: f468dcc53cad9424ea53301564753994
+  - enabled: 1
+    path: Assets/Scenes/ST_MainMenu.unity
+    guid: 7bfd728af9bb8dd49a37d48e49f3c232
+  - enabled: 1
+    path: Assets/Scenes/ST_Peter.unity
+    guid: f52bbae431f82324a841c409f3fbdfee
   - enabled: 1
     path: Assets/Scenes/ST_GameOver.unity
     guid: 6ef74af1c5311d7449758b18b2013103

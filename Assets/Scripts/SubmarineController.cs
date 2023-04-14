@@ -26,8 +26,8 @@ public class SubmarineController : MonoBehaviour
     public LinearDrive rotationController;
     public float rotationalSpeed;
 
-    [Header("Creature")]
-    public GameObject creature;
+    [Header("Submarine Properties")]
+    public bool powerShutOff = false;
 
     private Rigidbody rb;
 

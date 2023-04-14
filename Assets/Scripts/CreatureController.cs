@@ -1,3 +1,5 @@
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +14,7 @@ public class CreatureController : MonoBehaviour
 
     public float moveSpeed = 3f;
     public float rotateSpeed = 3f;
-    private Transform[] positions;
+    private Transform[] subPositions;
 
     public float approachCooldown = 10f;
     public float attackCooldown = 10f;
@@ -27,6 +29,8 @@ public class CreatureController : MonoBehaviour
     public bool resetFlag = false;
     public bool nextToSub = false;
     public float timer = 0f;
+    public int pathPos = 0;
+    public int nextPos = 1;
     public Transform targetPosition;
     public Transform prevPathPosition;
 
@@ -36,7 +40,7 @@ public class CreatureController : MonoBehaviour
         Transform leftPosition = submarine.transform.Find("Left Position");
         Transform rightPosition = submarine.transform.Find("Right Position");
         Transform frontPosition = submarine.transform.Find("Front Position");
-        positions = new Transform[] {leftPosition, rightPosition, frontPosition};
+        subPositions = new Transform[] {leftPosition, rightPosition, frontPosition};
         // TODO: set to first position in path
         targetPosition = pathPositions[0];
     }
@@ -52,7 +56,7 @@ public class CreatureController : MonoBehaviour
 
         if (dist > encounterDist)
         {
-            setTargetPathPosition();
+            targetPathPosition();
         }
         
         if (resetFlag)
@@ -69,36 +73,58 @@ public class CreatureController : MonoBehaviour
     }
 
     // sets next path position, based on if creature has reached previous path position and what position it is at
-    void setTargetPathPosition()
+    void targetPathPosition()
     {
-        int positionNum = 0;
-        int nextPos = 1;
         if (transform.position == targetPosition.position)
         {
-            if (positionNum == positions.Length - 1)
+            print("reached path position " + pathPos);
+            if (pathPos == pathPositions.Length - 1)
             {
                 nextPos = -1;
-            } else if (positionNum == 0)
-            {
+            } else if (pathPos == 0) {
                 nextPos = 1;
             }
+            pathPos += nextPos;
 
-            targetPosition = positions[positionNum + nextPos];
+            targetPosition = pathPositions[pathPos];
         }
     }
 
+    // Determine the target position the creature will move to around the submarine
+    void targetSubPosition()
+    {
+        if (!nextToSub)
+        {
+            foreach (Transform position in subPositions)
+            {
+                float targetPositionDist = Vector3.Distance(transform.position, subPositions[0].transform.position);
+                float currentDist = Vector3.Distance(transform.position, position.transform.position);
+                if (currentDist < targetPositionDist)
+                {
+                    targetPosition = position;
+                }
+            }
+            if (transform.position == subPositions[0].transform.position || transform.position == subPositions[1].transform.position)
+            {
+                targetPosition = subPositions[2];
+                nextToSub = true;
+            }
+        }
+    }
+
+
     void approachSub()
     {
-        if (prevPathPosition == null)
+        if (Array.Exists(pathPositions, position => position == targetPosition))
         {
             prevPathPosition = targetPosition;
         }
         // toggle to change depending on submarine emergency status
-        approachFlag = checkSubStatus();
+        approachFlag = true;
         if (approachFlag)
         {
             targetSubPosition();
-            if (transform.position == positions[2].position)
+            if (transform.position == subPositions[2].position)
             {
                 if (attackFlag)
                 {
@@ -111,7 +137,7 @@ public class CreatureController : MonoBehaviour
                     if (timer >= attackCooldown)
                     {
                         timer = 0f;
-                        resetFlag = false;
+                        attackFlag = true;
                     }
                 }
             }
@@ -120,13 +146,12 @@ public class CreatureController : MonoBehaviour
         {
             // add functionality to go back to what position it was targeting
             targetPosition = prevPathPosition;
-            prevPathPosition = null;
         }
     }
 
     public bool checkSubStatus()
     {
-        return submarine.powerShutOff;
+        return !submarine.powerShutOff;
     }
 
     // Check distance to submarine
@@ -135,36 +160,10 @@ public class CreatureController : MonoBehaviour
         float dist = Vector3.Distance(transform.position, submarine.transform.position);
         return dist;
     }
-
-    // Determine the target position the creature will move to around the submarine
-    void targetSubPosition()
-    {
-        if (!nextToSub)
-        {
-            foreach (Transform position in positions)
-            {
-                float targetPositionDist = Vector3.Distance(transform.position, targetPosition.transform.position);
-                float currentDist = Vector3.Distance(transform.position, position.transform.position);
-                if (currentDist < targetPositionDist)
-                {
-                    targetPosition = position;
-                }
-            }
-            if (transform.position == positions[0].transform.position || transform.position == positions[1].transform.position)
-            {
-                targetPosition = positions[2];
-                nextToSub = true;
-            }
-        }
-    }
-
     public void moveCreature()
     {
         float move = moveSpeed * Time.deltaTime;
-        if (dist < encounterDist)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition.transform.position, move);
-        }
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition.transform.position, move);
     }
 
     // Creature attacks sub (activate leak, causes noise, etc.)
@@ -176,10 +175,17 @@ public class CreatureController : MonoBehaviour
 
     public void rotateCreature()
     {
-        // adjust for offset by lowering focus point
-        Vector3 targetDir = submarine.transform.position - transform.position - 3*Vector3.up;
-        float step = rotateSpeed * Time.deltaTime;
-        Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
-        transform.rotation = Quaternion.LookRotation(newRotation);
+        if (Array.Exists(pathPositions, position => position == targetPosition))
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetPosition.rotation, Time.deltaTime * rotateSpeed/10);
+        }
+        else if (Array.Exists(subPositions, position => position == targetPosition))
+        {
+            // adjust for offset by lowering focus point
+            Vector3 targetDir = targetPosition.transform.position - transform.position - 3 * Vector3.up;
+            float step = rotateSpeed * Time.deltaTime;
+            Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
+            transform.rotation = Quaternion.LookRotation(newRotation);
+        }
     }
 }

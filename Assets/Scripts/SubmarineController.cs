@@ -9,12 +9,10 @@ using EZHover;
 public class SubmarineController : MonoBehaviour
 {
     [Header("Horizontal Controller")]
-    public CircularDrive horizontalController;
+    public LinearDrive horizontalController;
     public float horizontalSpeed;
     public float maxSpeed = 5f;
-    private float minSpeed;
-    private float minAngle;
-    private float maxAngle;
+    public float minSpeed = -2.5f;
 
     [Header("Elevation Controller")]
     public LinearDrive verticalController;
@@ -43,10 +41,6 @@ public class SubmarineController : MonoBehaviour
         hoverMovement = GetComponent<HoverMovement>();
         hoverLook = GetComponent<HoverLook>();
         hoverGrid = GetComponent<HoverGrid>();
-
-        minAngle = horizontalController.minAngle;
-        maxAngle = horizontalController.maxAngle;
-        minSpeed = maxSpeed / (maxAngle / minAngle);
     }
 
     private void Update()
@@ -57,8 +51,8 @@ public class SubmarineController : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        float currentHorizontal = horizontalController.outAngle;
-        horizontalSpeed = math.remap(minAngle, maxAngle, minSpeed, maxSpeed, currentHorizontal);
+        float currentHorizontal = horizontalController.linearMapping.value;
+        horizontalSpeed = math.remap(0f, 1f, minSpeed, maxSpeed, currentHorizontal);
         hoverMovement?.Move(new Vector2(0.0f, horizontalSpeed));
 
         float rotationInput = rotationController.linearMapping.value;

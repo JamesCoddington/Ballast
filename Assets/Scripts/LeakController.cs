@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeakControllerMOD : MonoBehaviour
+public class LeakController : MonoBehaviour
 {
     public GameObject leakParent;
     private int maxChildren;
@@ -17,12 +17,17 @@ public class LeakControllerMOD : MonoBehaviour
         maxChildren = leakParent.transform.childCount;
     }
 
-    void update()
+    void Update()
     {
         
     }
 
     void OnCollisionEnter(Collision collision)
+    {
+        takeDamage();
+    }
+
+    public void takeDamage()
     {
         print("POG FROG");
         if (notFound == false)
@@ -34,11 +39,12 @@ public class LeakControllerMOD : MonoBehaviour
             {
                 leak.gameObject.SetActive(true);
                 notFound = false;
-            } else {
+            }
+            else
+            {
                 notFound = true;
                 print(notFound);
             }
         }
-        
     }
 }

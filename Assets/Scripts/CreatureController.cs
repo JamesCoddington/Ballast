@@ -7,7 +7,9 @@ using Unity.Mathematics;
 
 public class CreatureController : MonoBehaviour
 {
-    public SubmarineController submarine;
+    public GameObject submarine;
+    private SubmarineController submarineController;
+    private LeakController leakController;
 
     public float encounterDist = 30f;
     // public float attackDist = 5f;
@@ -24,7 +26,7 @@ public class CreatureController : MonoBehaviour
     [Header("Dev Info")]
     public float dist;
     public float rotationDirection;
-    public bool approachFlag = false;
+    public bool approachingFlag = false;
     public bool attackFlag = true;
     public bool resetFlag = false;
     public bool nextToSub = false;
@@ -37,9 +39,12 @@ public class CreatureController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Transform leftPosition = submarine.transform.Find("Left Position");
-        Transform rightPosition = submarine.transform.Find("Right Position");
-        Transform frontPosition = submarine.transform.Find("Front Position");
+        submarineController = submarine.GetComponent<SubmarineController>();
+        leakController = submarine.GetComponent<LeakController>();
+
+        Transform leftPosition = submarineController.transform.Find("Left Position");
+        Transform rightPosition = submarineController.transform.Find("Right Position");
+        Transform frontPosition = submarineController.transform.Find("Front Position");
         subPositions = new Transform[] {leftPosition, rightPosition, frontPosition};
         // TODO: set to first position in path
         targetPosition = pathPositions[0];
@@ -54,7 +59,7 @@ public class CreatureController : MonoBehaviour
             approachSub();
         } 
 
-        if (dist > encounterDist)
+        if (dist > encounterDist || !approachingFlag)
         {
             targetPathPosition();
         }
@@ -77,6 +82,15 @@ public class CreatureController : MonoBehaviour
     {
         if (transform.position == targetPosition.position)
         {
+            // Check to see if we've reset to the previous path position
+            // If so, set the resetFlag to true & reset timer
+            if (prevPathPosition != null && targetPosition.position == prevPathPosition.position)
+            {
+                prevPathPosition = null;
+                resetFlag = true;
+                attackFlag = true;
+                timer = 0f;
+            }
             print("reached path position " + pathPos);
             if (pathPos == pathPositions.Length - 1)
             {
@@ -120,8 +134,8 @@ public class CreatureController : MonoBehaviour
             prevPathPosition = targetPosition;
         }
         // toggle to change depending on submarine emergency status
-        approachFlag = true;
-        if (approachFlag)
+        approachingFlag = !submarineController.powerShutOff;
+        if (approachingFlag)
         {
             targetSubPosition();
             if (transform.position == subPositions[2].position)
@@ -151,13 +165,13 @@ public class CreatureController : MonoBehaviour
 
     public bool checkSubStatus()
     {
-        return !submarine.powerShutOff;
+        return !submarineController.powerShutOff;
     }
 
     // Check distance to submarine
     public float checkDist()
     {
-        float dist = Vector3.Distance(transform.position, submarine.transform.position);
+        float dist = Vector3.Distance(transform.position, submarineController.transform.position);
         return dist;
     }
     public void moveCreature()
@@ -170,6 +184,7 @@ public class CreatureController : MonoBehaviour
     public void attackSub()
     {
         print("Attack!");
+        leakController.takeDamage();
         return;
     }
 
@@ -177,12 +192,15 @@ public class CreatureController : MonoBehaviour
     {
         if (Array.Exists(pathPositions, position => position == targetPosition))
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetPosition.rotation, Time.deltaTime * rotateSpeed/10);
+            Vector3 targetDir = targetPosition.transform.position - transform.position;
+            float step = rotateSpeed * Time.deltaTime;
+            Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
+            transform.rotation = Quaternion.LookRotation(newRotation);
         }
         else if (Array.Exists(subPositions, position => position == targetPosition))
         {
             // adjust for offset by lowering focus point
-            Vector3 targetDir = targetPosition.transform.position - transform.position - 3 * Vector3.up;
+            Vector3 targetDir = submarine.transform.position - transform.position - 3 * Vector3.up;
             float step = rotateSpeed * Time.deltaTime;
             Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
             transform.rotation = Quaternion.LookRotation(newRotation);

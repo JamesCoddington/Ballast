@@ -19,7 +19,7 @@ public class CreatureController : MonoBehaviour
     private Transform[] subPositions;
 
     public float approachCooldown = 10f;
-    public float attackCooldown = 10f;
+    public float attackCooldown = 5f;
 
     public Transform[] pathPositions;
 
@@ -42,6 +42,7 @@ public class CreatureController : MonoBehaviour
         submarineController = submarine.GetComponent<SubmarineController>();
         leakController = submarine.GetComponent<LeakController>();
 
+        // These could probably be refactored into enums, or handled with a switch case statement
         Transform leftPosition = submarineController.transform.Find("Left Position");
         Transform rightPosition = submarineController.transform.Find("Right Position");
         Transform frontPosition = submarineController.transform.Find("Front Position");

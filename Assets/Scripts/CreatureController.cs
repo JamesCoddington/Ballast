@@ -57,9 +57,9 @@ public class CreatureController : MonoBehaviour
         if (dist <= encounterDist && !resetFlag)
         {
             approachSub();
-        } 
+        }
 
-        if (dist > encounterDist || !approachingFlag)
+        if (dist > encounterDist || !approachingFlag || resetFlag)
         {
             targetPathPosition();
         }
@@ -80,6 +80,11 @@ public class CreatureController : MonoBehaviour
     // sets next path position, based on if creature has reached previous path position and what position it is at
     void targetPathPosition()
     {
+        if (prevPathPosition)
+        {
+            // go back to what position it was targeting
+            targetPosition = prevPathPosition;
+        }
         if (transform.position == targetPosition.position)
         {
             // Check to see if we've reset to the previous path position
@@ -126,7 +131,6 @@ public class CreatureController : MonoBehaviour
         }
     }
 
-
     void approachSub()
     {
         if (Array.Exists(pathPositions, position => position == targetPosition))
@@ -134,32 +138,14 @@ public class CreatureController : MonoBehaviour
             prevPathPosition = targetPosition;
         }
         // toggle to change depending on submarine emergency status
-        approachingFlag = !submarineController.powerShutOff;
+        approachingFlag = checkSubStatus();
         if (approachingFlag)
         {
             targetSubPosition();
             if (transform.position == subPositions[2].position)
             {
-                if (attackFlag)
-                {
-                    attackSub();
-                    attackFlag = false;
-                }
-                else
-                {
-                    timer += Time.deltaTime;
-                    if (timer >= attackCooldown)
-                    {
-                        timer = 0f;
-                        attackFlag = true;
-                    }
-                }
+                attackSub();
             }
-        }
-        else
-        {
-            // add functionality to go back to what position it was targeting
-            targetPosition = prevPathPosition;
         }
     }
 
@@ -180,30 +166,40 @@ public class CreatureController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetPosition.transform.position, move);
     }
 
-    // Creature attacks sub (activate leak, causes noise, etc.)
+    // Creature attacks sub (activate leak, causes noise, etc.) then goes on cooldown
     public void attackSub()
     {
-        print("Attack!");
-        leakController.takeDamage();
-        return;
+
+        if (attackFlag)
+        {
+            leakController.takeDamage();
+            attackFlag = false;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+            if (timer >= attackCooldown)
+            {
+                timer = 0f;
+                attackFlag = true;
+            }
+        }
     }
 
     public void rotateCreature()
     {
+        Vector3 targetDir;
         if (Array.Exists(pathPositions, position => position == targetPosition))
         {
-            Vector3 targetDir = targetPosition.transform.position - transform.position;
-            float step = rotateSpeed * Time.deltaTime;
-            Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
-            transform.rotation = Quaternion.LookRotation(newRotation);
+            targetDir = targetPosition.transform.position - transform.position;
         }
-        else if (Array.Exists(subPositions, position => position == targetPosition))
+        else 
         {
             // adjust for offset by lowering focus point
-            Vector3 targetDir = submarine.transform.position - transform.position - 3 * Vector3.up;
-            float step = rotateSpeed * Time.deltaTime;
-            Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
-            transform.rotation = Quaternion.LookRotation(newRotation);
+            targetDir = submarine.transform.position - transform.position - 3 * Vector3.up;
         }
+        float step = rotateSpeed * Time.deltaTime;
+        Vector3 newRotation = Vector3.RotateTowards(transform.forward, -targetDir, step, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newRotation);
     }
 }

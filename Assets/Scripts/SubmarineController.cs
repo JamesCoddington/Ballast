@@ -53,7 +53,8 @@ public class SubmarineController : MonoBehaviour
     {
         float currentHorizontal = horizontalController.linearMapping.value;
         horizontalSpeed = math.remap(0f, 1f, minSpeed, maxSpeed, currentHorizontal);
-        hoverMovement?.Move(new Vector2(0.0f, horizontalSpeed));
+        hoverMovement.MoveSpeed = horizontalSpeed;
+        hoverMovement.Move(new Vector2(0.0f, (horizontalSpeed != 0 ? 1f : 0f)));
 
         float rotationInput = rotationController.linearMapping.value;
         rotationalSpeed = math.remap(0f, 1f, -1f, 1f, rotationInput);

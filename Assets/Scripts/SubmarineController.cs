@@ -46,7 +46,6 @@ public class SubmarineController : MonoBehaviour
     private void Update()
     {
         UpdateSpeed();
-        
     }
 
     private void UpdateSpeed()
@@ -68,6 +67,18 @@ public class SubmarineController : MonoBehaviour
         float elevationInput = verticalController.linearMapping.value;
         elevation = math.remap(0f, 1f, maxElevation, minElevation, elevationInput);
         hoverGrid.TargetHeight = elevation;
+    }
+
+    public void powerOff()
+    {
+        powerShutOff = true;
+        hoverLook.HorizontalTurnSpeed = 0f;
+        hoverMovement.MoveSpeed = 0f;
+    }
+
+    public void powerOn()
+    {
+        powerShutOff = false;
     }
 
     private void OnCollisionEnter(Collision collision)

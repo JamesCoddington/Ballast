@@ -9,13 +9,6 @@ public class LeakWeld : MonoBehaviour
     public bool isWelding = false;
     public LeakController leakController;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -30,7 +23,6 @@ public class LeakWeld : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Welder") {
              //do things
-
              weldTimer = 0;
              isWelding = true;
              print("imWelding");

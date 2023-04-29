@@ -3,6 +3,10 @@ guid: f54d1bd14bd3ca042bd867b519fee8cc
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
+<<<<<<<< HEAD:Assets/TextMesh Pro.meta
+========
+  mainObjectFileID: 0
+>>>>>>>> main:Assets/Scenes/ST_Peter/WaterBotTrigger Profile.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

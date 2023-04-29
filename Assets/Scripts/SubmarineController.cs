@@ -24,6 +24,10 @@ public class SubmarineController : MonoBehaviour
     public LinearDrive rotationController;
     public float rotationalSpeed;
 
+    [Header("Lights")]
+    public Light[] normalLights;
+    public Light[] emergencyLights;
+
     [Header("Submarine Properties")]
     public bool powerShutOff = false;
 

@@ -1,8 +1,15 @@
 fileFormatVersion: 2
-guid: 234cf83c4956f1a4281277fdaaaaae7e
+<<<<<<<< HEAD:Assets/Materials/New Material.mat.meta
+guid: 81b0c1242d40bb94c9978e168c15cce9
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
+========
+guid: dd24a95ceefaccb449551f6dd1cb5066
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+>>>>>>>> a469f01a4c5adbae03d1b2417033065aba02db98:Assets/Scenes/ST_Peter/WaterTopTrigger Profile.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

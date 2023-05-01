@@ -7,6 +7,7 @@ public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager Instance;
     public Scene SceneOrigin;
+    public GameObject Player;
     
     public enum Scene
     {
@@ -23,6 +24,7 @@ public class ScenesManager : MonoBehaviour
     public void LoadScene(Scene scene)
     {
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+        Player.SetActive(false);
         SceneManager.LoadScene(scene.ToString());
     }
 

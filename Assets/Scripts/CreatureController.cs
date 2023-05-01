@@ -24,9 +24,9 @@ public class CreatureController : MonoBehaviour
     public Transform[] pathPositions;
 
     [Header("Dev Info")]
-    public float dist;
+    public bool inRange = false;
     public float rotationDirection;
-    public bool approachingFlag = false;
+    public bool subPowerOff = false;
     public bool attackFlag = true;
     public bool resetFlag = false;
     public bool nextToSub = false;
@@ -49,18 +49,20 @@ public class CreatureController : MonoBehaviour
         subPositions = new Transform[] {leftPosition, rightPosition, frontPosition};
         // TODO: set to first position in path
         targetPosition = pathPositions[0];
+
+        SphereCollider encounterRange = GetComponent<SphereCollider>();
+        encounterRange.radius = encounterDist / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        dist = checkDist();
-        if (dist <= encounterDist && !resetFlag)
+        if (inRange && !resetFlag)
         {
             approachSub();
         }
 
-        if (dist > encounterDist || !approachingFlag || resetFlag)
+        if (!inRange || !subPowerOff || resetFlag)
         {
             targetPathPosition();
         }
@@ -76,6 +78,22 @@ public class CreatureController : MonoBehaviour
         }
         moveCreature();
         rotateCreature();
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name == "HeadCollider")
+        {
+            inRange = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "HeadCollider")
+        {
+            inRange = false;
+        }
     }
 
     // sets next path position, based on if creature has reached previous path position and what position it is at
@@ -139,8 +157,8 @@ public class CreatureController : MonoBehaviour
             prevPathPosition = targetPosition;
         }
         // toggle to change depending on submarine emergency status
-        approachingFlag = checkSubStatus();
-        if (approachingFlag)
+        subPowerOff = checkSubStatus();
+        if (subPowerOff)
         {
             targetSubPosition();
             if (transform.position == subPositions[2].position)
@@ -153,13 +171,6 @@ public class CreatureController : MonoBehaviour
     public bool checkSubStatus()
     {
         return !submarineController.powerShutOff;
-    }
-
-    // Check distance to submarine
-    public float checkDist()
-    {
-        float dist = Vector3.Distance(transform.position, submarineController.transform.position);
-        return dist;
     }
     public void moveCreature()
     {

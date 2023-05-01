@@ -5,6 +5,9 @@ using UnityEngine;
 public class LeakControllerMOD : MonoBehaviour
 {
     public GameObject leakParent;
+    public AudioSource source;
+    public AudioClip clip;
+
     private int maxChildren;
     public bool notFound = false;
     //public bool canCollide = true;
@@ -33,6 +36,7 @@ public class LeakControllerMOD : MonoBehaviour
             if (leak.gameObject.activeSelf == false)
             {
                 leak.gameObject.SetActive(true);
+                source.PlayOneShot(clip);
                 notFound = false;
             } else {
                 notFound = true;

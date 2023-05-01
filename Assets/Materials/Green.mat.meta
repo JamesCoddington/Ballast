@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/Green.mat.meta
 guid: d5ac1d50d5b125d479e33e1538ff7a2a
+========
+guid: f2c6ae2ebf0b69942b8eb4df81524b6e
+>>>>>>>> 94de90f37298613b7a10254b3009b85843e13100:Assets/Materials/M_EyeTest 2.mat.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 0
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

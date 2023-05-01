@@ -62,7 +62,7 @@ public class CreatureController : MonoBehaviour
             approachSub();
         }
 
-        if (!inRange || !subPowerOff || resetFlag)
+        if (!inRange || subPowerOff || resetFlag)
         {
             targetPathPosition();
         }
@@ -152,14 +152,14 @@ public class CreatureController : MonoBehaviour
 
     void approachSub()
     {
-        if (Array.Exists(pathPositions, position => position == targetPosition))
-        {
-            prevPathPosition = targetPosition;
-        }
         // toggle to change depending on submarine emergency status
         subPowerOff = checkSubStatus();
-        if (subPowerOff)
+        if (!subPowerOff)
         {
+            if (Array.Exists(pathPositions, position => position == targetPosition))
+            {
+                prevPathPosition = targetPosition;
+            }
             targetSubPosition();
             if (transform.position == subPositions[2].position)
             {
@@ -170,7 +170,7 @@ public class CreatureController : MonoBehaviour
 
     public bool checkSubStatus()
     {
-        return !submarineController.powerShutOff;
+        return submarineController.powerShutOff;
     }
     public void moveCreature()
     {

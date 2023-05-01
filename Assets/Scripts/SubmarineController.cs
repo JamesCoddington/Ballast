@@ -49,7 +49,10 @@ public class SubmarineController : MonoBehaviour
 
     private void Update()
     {
-        UpdateSpeed();
+        if (!powerShutOff)
+        {
+            UpdateSpeed();
+        }
     }
 
     private void UpdateSpeed()
@@ -73,16 +76,42 @@ public class SubmarineController : MonoBehaviour
         hoverGrid.TargetHeight = elevation;
     }
 
-    public void powerOff()
+    public void togglePower()
     {
-        powerShutOff = true;
-        hoverLook.HorizontalTurnSpeed = 0f;
-        hoverMovement.MoveSpeed = 0f;
-    }
+        powerShutOff = !powerShutOff;
+        print("toggling Power to " + powerShutOff);
+        if (powerShutOff)
+        {
+            // Lights
+            foreach (Light light in normalLights)
+            {
+                light.enabled = false;
+            }
+            foreach (Light light in emergencyLights)
+            {
+                light.enabled = true;
+            }
 
-    public void powerOn()
-    {
-        powerShutOff = false;
+            // Movement
+            rotationalSpeed = 0f;
+            horizontalSpeed = 0f;
+
+        } else
+        {
+            // Lights
+            foreach (Light light in normalLights)
+            {
+                light.enabled = true;
+            }
+            foreach (Light light in emergencyLights)
+            {
+                light.enabled = false;
+            }
+
+            // Movement
+            // Automatically reset by UpdateSpeed()
+
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

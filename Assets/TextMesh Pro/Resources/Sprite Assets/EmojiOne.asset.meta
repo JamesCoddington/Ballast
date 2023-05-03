@@ -1,21 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset.meta
 guid: c41005c129ba4d66911b75229fd70b45
-========
-<<<<<<<< HEAD:Assets/Materials/Aluminium Insulator_graph_0/graph_0.asset.meta
-guid: 877b07f6e79bc2d4f979a567aa476236
->>>>>>>> Monster:Assets/Materials/Aluminium Insulator_graph_0/graph_0.asset.meta
 NativeFormatImporter:
-========
-guid: f54d1bd14bd3ca042bd867b519fee8cc
-folderAsset: yes
-DefaultImporter:
->>>>>>>> be9d4dc (Updated Submarine Movement):Assets/TextMesh Pro.meta
   externalObjects: {}
-<<<<<<<< HEAD:Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset.meta
   mainObjectFileID: 0
-========
->>>>>>>> Monster:Assets/Materials/Aluminium Insulator_graph_0/graph_0.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

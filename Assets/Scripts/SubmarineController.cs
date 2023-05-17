@@ -23,6 +23,7 @@ public class SubmarineController : MonoBehaviour
     [Header("Rotation Controller")]
     public LinearDrive rotationController;
     public float rotationalSpeed;
+    public float maxRotationSpeed = 10f;
 
     [Header("Lights")]
     public Light[] normalLights;
@@ -63,7 +64,7 @@ public class SubmarineController : MonoBehaviour
         hoverMovement.Move(new Vector2(0.0f, (horizontalSpeed != 0 ? 1f : 0f)));
 
         float rotationInput = rotationController.linearMapping.value;
-        rotationalSpeed = math.remap(0f, 1f, -1f, 1f, rotationInput);
+        rotationalSpeed = math.remap(0f, 1f, -maxRotationSpeed, maxRotationSpeed, rotationInput);
         hoverLook.HorizontalTurnSpeed = rotationalSpeed;
         if (rotationalSpeed < 0f)
         {

@@ -9,6 +9,7 @@ public class LeakController : MonoBehaviour
     public AudioClip clip;
 
     private int maxChildren;
+    private int leakPercent;
     public bool notFound = false;
     //public bool canCollide = true;
     //public float collideCD = 1.2f;
@@ -27,7 +28,13 @@ public class LeakController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        takeDamage();
+        leakPercent += Random.Range(1, 100);
+        if (leakPercent >= 100)
+        {
+            print(leakPercent);
+            takeDamage();
+            leakPercent = 0;
+        }
     }
 
     public void takeDamage()

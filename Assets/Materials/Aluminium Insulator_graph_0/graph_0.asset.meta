@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/Aluminium Insulator_graph_0/graph_0.asset.meta
+guid: c94b1977178c05f44961ed328b20303f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+========
+guid: 4a0cb3772063d9e469022c415b463777
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+>>>>>>>> 47bd583e15e73bb0e1198f6606d9f7384345f208:Assets/Animations/SubGRP.controller.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

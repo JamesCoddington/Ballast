@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/TimerSceneTest.unity.meta
 guid: a168ddf7d66593c46a5e21db6ca7ac6c
+========
+guid: 816587ff8b5250d449d5087acfb23fd2
+folderAsset: yes
+>>>>>>>> a2f1793ca2e5b5789cf90201055a96bf0c4bbdab:Assets/Audio/Stinger.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

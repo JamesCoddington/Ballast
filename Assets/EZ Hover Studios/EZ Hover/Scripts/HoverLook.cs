@@ -10,7 +10,7 @@ namespace EZHover
         [SerializeField] private float verticalTurnSpeed = 5f;
         public float VerticalTurnSpeed { get { return verticalTurnSpeed; } set { verticalTurnSpeed = value; } }
 
-        [SerializeField] private float horizontalTurnSpeed = 5f;
+        [SerializeField] private float horizontalTurnSpeed = 100f;
         public float HorizontalTurnSpeed { get { return horizontalTurnSpeed; } set { horizontalTurnSpeed = value; } }
 
         private Rigidbody rb;

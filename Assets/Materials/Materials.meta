@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/Materials.meta
 guid: aac676074aeef6140922a9b969dc86d6
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
+========
+guid: ffd0f689040b3144aa3d5891796a1930
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+>>>>>>>> 47bd583e15e73bb0e1198f6606d9f7384345f208:Assets/Animations/SubIntroMove.anim.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

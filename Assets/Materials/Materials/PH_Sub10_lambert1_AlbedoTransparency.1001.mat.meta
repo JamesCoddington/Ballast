@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/Materials/PH_Sub10_lambert1_AlbedoTransparency.1001.mat.meta
 guid: 4c646199a7b04864a83013fd10dc2322
+========
+guid: 877b07f6e79bc2d4f979a567aa476236
+>>>>>>>> 47bd583e15e73bb0e1198f6606d9f7384345f208:Assets/Materials/Aluminium Insulator_graph_0/graph_0.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

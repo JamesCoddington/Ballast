@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/LightBloom.mat.meta
+guid: 498561f704020f14f8eed4de55dc4ea8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+========
+guid: 816587ff8b5250d449d5087acfb23fd2
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+>>>>>>>> a2f1793ca2e5b5789cf90201055a96bf0c4bbdab:Assets/Audio/Stinger.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

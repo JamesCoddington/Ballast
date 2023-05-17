@@ -41,7 +41,7 @@ public class LeakController : MonoBehaviour
             if (leak.gameObject.activeSelf == false)
             {
                 leak.gameObject.SetActive(true);
-                source.PlayOneShot(clip);
+                source.Play();
                 notFound = false;
             }
             else

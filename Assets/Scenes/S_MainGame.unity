@@ -3950,7 +3950,7 @@ MonoBehaviour:
   snapAttachEaseInCompleted: 0
   skeletonPoser: {fileID: 0}
   handFollowTransform: 1
-  highlightOnHover: 1
+  highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
 --- !u!54 &164237936
@@ -6329,7 +6329,7 @@ MonoBehaviour:
   snapAttachEaseInCompleted: 0
   skeletonPoser: {fileID: 0}
   handFollowTransform: 1
-  highlightOnHover: 1
+  highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
 --- !u!65 &324490368
@@ -18853,7 +18853,7 @@ MonoBehaviour:
   snapAttachEaseInCompleted: 0
   skeletonPoser: {fileID: 0}
   handFollowTransform: 1
-  highlightOnHover: 1
+  highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
 --- !u!54 &948891823
@@ -19490,9 +19490,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: EMERGENCY OXYGEN TIMER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9d94999f4e163a64d9943d70dde55ed5, type: 2}
-  m_sharedMaterial: {fileID: 3071412316608819739, guid: 9d94999f4e163a64d9943d70dde55ed5,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -19595,7 +19594,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3071412316608819739, guid: 9d94999f4e163a64d9943d70dde55ed5, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -39057,9 +39056,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9d94999f4e163a64d9943d70dde55ed5, type: 2}
-  m_sharedMaterial: {fileID: 3071412316608819739, guid: 9d94999f4e163a64d9943d70dde55ed5,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -39162,7 +39160,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 3071412316608819739, guid: 9d94999f4e163a64d9943d70dde55ed5, type: 2}
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

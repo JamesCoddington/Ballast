@@ -5116,7 +5116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneOrigin: 0
-  Player: {fileID: 0}
+  Player: {fileID: 1718849785}
 --- !u!4 &1373705153
 Transform:
   m_ObjectHideFlags: 0

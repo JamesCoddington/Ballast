@@ -12,7 +12,7 @@ public class ScenesManager : MonoBehaviour
     public enum Scene
     {
         ST_MainMenu,
-        ST_Peter,
+        S_MainGame,
         ST_GameOver,
     }
 
@@ -23,15 +23,16 @@ public class ScenesManager : MonoBehaviour
 
     public void LoadScene(Scene scene)
     {
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
-        Player.SetActive(false);
+        string previousScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(scene.ToString());
+        Player.SetActive(false);
+        SceneManager.UnloadSceneAsync(previousScene);
     }
 
     // For making the main game when we start up
     public void LoadNewGame()
     {
-        LoadScene(Scene.ST_Peter);
+        LoadScene(Scene.S_MainGame);
     }
 
     public void LoadMainMenu()

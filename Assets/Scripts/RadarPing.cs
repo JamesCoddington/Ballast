@@ -16,10 +16,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RadarPing : MonoBehaviour {
+    public AudioSource sound;
+
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Hit2");
-        Debug.Log("Hit2 " + other.gameObject.GetComponent<Animation>());
         other.gameObject.GetComponent<Animation>().Play("SonarPip");
+        sound.Play();
     }
 }

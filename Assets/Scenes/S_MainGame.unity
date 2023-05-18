@@ -418,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 3409537067062913248, guid: 155c12c9149fe5c4e94245904fdd1b92,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9543065
+      value: 0.954282
       objectReference: {fileID: 0}
     - target: {fileID: 3409537067062913248, guid: 155c12c9149fe5c4e94245904fdd1b92,
         type: 3}
@@ -428,7 +428,7 @@ PrefabInstance:
     - target: {fileID: 3409537067062913248, guid: 155c12c9149fe5c4e94245904fdd1b92,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.29882982
+      value: 0.29890808
       objectReference: {fileID: 0}
     - target: {fileID: 3409537067062913248, guid: 155c12c9149fe5c4e94245904fdd1b92,
         type: 3}
@@ -10150,7 +10150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   submarine: {fileID: 1941868255}
-  encounterDist: 14.97
+  encounterDist: 10
   moveSpeed: 6
   rotateSpeed: 1
   approachCooldown: 10
@@ -12979,7 +12979,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 44.45, y: 17.63, z: -49.32}
   m_RotationAtRest: {x: 0, y: -54.67682, z: 0}
   m_TranslationOffsets:
-  - {x: -170.0593, y: 14.205999, z: 160.64319}
+  - {x: -0.038999557, y: 13.335999, z: -0.20461273}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -31211,7 +31211,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.039, y: 2.162, z: 0.152}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.039001465, y: -0.83800006, z: 0.18836975}
+  - {x: -0.039001465, y: -0.83800006, z: 0.18838501}
   m_RotationOffsets:
   - {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -33732,7 +33732,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888869367}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.291, z: -0.03899941}
+  m_LocalPosition: {x: -0.0000001937151, y: 2.2910001, z: -0.038999557}
   m_LocalScale: {x: 0.071922, y: 0.071922, z: 0.071922}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34983,6 +34983,7 @@ MonoBehaviour:
   leakParent: {fileID: 577815413}
   source: {fileID: 0}
   clip: {fileID: 0}
+  randoInt: 0
   notFound: 0
 --- !u!114 &1941868259
 MonoBehaviour:
@@ -36730,7 +36731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031735552}
   m_LocalRotation: {x: -0, y: -0.45924523, z: -0, w: 0.88830954}
-  m_LocalPosition: {x: 273.99, y: 1.3099995, z: -3.6}
+  m_LocalPosition: {x: 44.45, y: 2.18, z: -49.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

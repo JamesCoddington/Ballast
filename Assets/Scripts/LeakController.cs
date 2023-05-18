@@ -7,6 +7,7 @@ public class LeakController : MonoBehaviour
     public GameObject leakParent;
     public AudioSource source;
     public AudioClip clip;
+    public int randoInt = 0;
 
     private int maxChildren;
     public bool notFound = false;
@@ -20,11 +21,6 @@ public class LeakController : MonoBehaviour
         maxChildren = leakParent.transform.childCount;
     }
 
-    void Update()
-    {
-        
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         takeDamage();
@@ -32,9 +28,11 @@ public class LeakController : MonoBehaviour
 
     public void takeDamage()
     {
-        print("POG FROG");
-        if (notFound == false)
+        randoInt += Random.Range(1, 4);
+        print($"POG FROG {randoInt}");
+        if (notFound == false && randoInt > 4)
         {
+            randoInt = 0;
             int randomLeak = Random.Range(0, maxChildren);
             Transform leak = leakParent.transform.GetChild(randomLeak);
             print(randomLeak);

@@ -184,7 +184,9 @@ public class CreatureController : MonoBehaviour
 
         if (attackFlag)
         {
+            leakController.randoInt = 5;
             leakController.takeDamage();
+
             attackFlag = false;
         }
         else

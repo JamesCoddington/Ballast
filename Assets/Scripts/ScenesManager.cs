@@ -14,6 +14,7 @@ public class ScenesManager : MonoBehaviour
         ST_MainMenu,
         S_IntroCutscene,
         S_MainGame,
+        S_Victory,
         ST_GameOver,
     }
 

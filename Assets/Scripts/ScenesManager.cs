@@ -23,10 +23,10 @@ public class ScenesManager : MonoBehaviour
 
     public void LoadScene(Scene scene)
     {
-        string previousScene = SceneManager.GetActiveScene().name;
+        //string previousScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(scene.ToString());
         Player.SetActive(false);
-        SceneManager.UnloadSceneAsync(previousScene);
+        // SceneManager.UnloadSceneAsync(previousScene);
     }
 
     // For making the main game when we start up

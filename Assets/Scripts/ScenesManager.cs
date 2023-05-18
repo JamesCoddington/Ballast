@@ -12,6 +12,7 @@ public class ScenesManager : MonoBehaviour
     public enum Scene
     {
         ST_MainMenu,
+        S_IntroCutscene,
         S_MainGame,
         ST_GameOver,
     }
@@ -32,11 +33,16 @@ public class ScenesManager : MonoBehaviour
     // For making the main game when we start up
     public void LoadNewGame()
     {
-        LoadScene(Scene.S_MainGame);
+        LoadScene(Scene.S_IntroCutscene);
     }
 
     public void LoadMainMenu()
     {
         LoadScene(Scene.ST_MainMenu);
+    }
+
+    public void LoadMainGame()
+    {
+        LoadScene(Scene.S_MainGame);
     }
 }

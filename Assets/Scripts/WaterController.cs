@@ -69,7 +69,7 @@ public class WaterController : MonoBehaviour
             }
             //t += Time.deltaTime / duration;
             //transform.position = Vector3.Lerp(transform.position, startPosition, t);
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, startPosition, (Time.deltaTime / duration));
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, startPosition, 5 * (Time.deltaTime / duration));
         }
     }
 }

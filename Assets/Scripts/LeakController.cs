@@ -28,9 +28,7 @@ public class LeakController : MonoBehaviour
 
     public void takeDamage()
     {
-        randoInt = Random.Range(1, 2);
-        print($"POG FROG {randoInt}");
-        if (notFound == false && randoInt == 2)
+        if (notFound == false)
         {
             randoInt = 0;
             int randomLeak = Random.Range(0, maxChildren);
@@ -45,7 +43,6 @@ public class LeakController : MonoBehaviour
             else
             {
                 notFound = true;
-                print(notFound);
             }
         }
     }

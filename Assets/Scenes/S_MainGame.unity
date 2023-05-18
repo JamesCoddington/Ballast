@@ -38022,7 +38022,7 @@ PositionConstraint:
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
-  m_IsContraintActive: 1
+  m_IsContraintActive: 0
   m_IsLocked: 1
   m_Sources:
   - sourceTransform: {fileID: 1757832394}
@@ -38051,7 +38051,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888869367}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
